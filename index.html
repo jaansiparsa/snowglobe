@@ -3,145 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Snow Globe of Anything — CS184 Project Proposal</title>
-<meta name="description" content="CS184 Fall 2026 final project proposal: a real-time interactive snow globe of anything — glass refraction, snow particle physics, and swirling water.">
+<title>CS184 Project Proposal</title>
+<meta name="description" content="CS184/284A Fall 2026 final project proposal.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#fcfcfb;
-    --ink:#1a1a18;
-    --muted:#6b6b66;
-    --faint:#9a9a93;
-    --line:#e4e3de;
-    --accent:#1a1a18;
-    --rule:#111;
-    --maxw:640px;
-  }
-  @media (prefers-color-scheme:dark){
-    :root:not([data-theme="light"]){
-      --bg:#121311; --ink:#ececea; --muted:#a3a39c; --faint:#74746d;
-      --line:#2a2b27; --accent:#ececea; --rule:#ececea;
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:#121311; --ink:#ececea; --muted:#a3a39c; --faint:#74746d;
-    --line:#2a2b27; --accent:#ececea; --rule:#ececea;
-  }
-  *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{
-    margin:0;background:var(--bg);color:var(--ink);
-    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-
-  /* Masthead */
-  header{padding:96px 0 0}
-  .kicker{
-    font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);
-    font-weight:500;margin:0 0 28px;
-  }
-  h1{
-    font-family:"Newsreader",Georgia,serif;font-weight:500;
-    font-size:clamp(34px,7vw,52px);line-height:1.08;letter-spacing:-.015em;
-    margin:0 0 20px;
-  }
-  .standfirst{
-    font-family:"Newsreader",Georgia,serif;font-size:clamp(18px,2.6vw,21px);
-    line-height:1.55;color:var(--muted);font-style:italic;margin:0;max-width:34em;
-  }
-  .masthead-meta{
-    margin:34px 0 0;padding-top:20px;border-top:1px solid var(--line);
-    display:flex;flex-wrap:wrap;gap:4px 22px;font-size:13.5px;color:var(--muted);
-  }
-  .masthead-meta a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
-  .masthead-meta a:hover{color:var(--ink);border-color:var(--ink)}
-
-  /* Sections */
-  section{padding:56px 0 0}
-  section:last-of-type{padding-bottom:12px}
-  .sec-label{
-    font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);
-    font-weight:600;margin:0 0 10px;
-  }
-  .sec-label b{color:var(--ink);font-weight:600;margin-right:10px}
-  h2{
-    font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:27px;
-    line-height:1.2;letter-spacing:-.01em;margin:0 0 18px;
-  }
-  h3{
-    font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);
-    font-weight:600;margin:30px 0 10px;
-  }
-  p{margin:0 0 16px}
-  .lead{color:var(--muted)}
-  strong{font-weight:600}
-  a{color:var(--ink)}
-  ul{list-style:none;padding:0;margin:14px 0}
-  li{position:relative;padding-left:20px;margin:9px 0}
-  li::before{content:"";position:absolute;left:0;top:.72em;width:5px;height:1px;background:var(--faint)}
-  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;background:var(--line);padding:1px 5px;border-radius:3px}
-
-  /* Team */
-  .team{margin:18px 0 0;border-top:1px solid var(--line)}
-  .member{
-    display:flex;justify-content:space-between;align-items:baseline;gap:16px;
-    padding:13px 0;border-bottom:1px solid var(--line);
-  }
-  .member .role{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
-  .member .name{color:var(--muted)}
-
-  /* Deliverables */
-  .split{display:grid;grid-template-columns:1fr 1fr;gap:38px;margin-top:8px}
-  .split h3{margin-top:0;display:flex;align-items:baseline;gap:9px}
-  .split h3 .n{font-family:"Newsreader",serif;font-style:italic;font-size:20px;text-transform:none;letter-spacing:0;color:var(--faint);font-weight:400}
-
-  /* Schedule */
-  .week{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:18px 0;border-top:1px solid var(--line)}
-  .week:first-of-type{border-top:0;padding-top:4px}
-  .week .wk{font-weight:600;font-size:14px}
-  .week .wk small{display:block;color:var(--faint);font-weight:400;font-size:12.5px;margin-top:2px}
-  .week ul{margin:0}
-  .week li{margin:5px 0}
-
-  footer{
-    margin-top:72px;padding:26px 0 72px;border-top:1px solid var(--line);
-    font-size:13px;color:var(--faint);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
-  }
-  footer a{color:var(--faint);text-decoration:none;border-bottom:1px solid var(--line)}
-  footer a:hover{color:var(--ink)}
-
-  @media (max-width:600px){
-    header{padding-top:64px}
-    .split{grid-template-columns:1fr;gap:28px}
-    .week{grid-template-columns:1fr;gap:6px}
-  }
-
-  /* Print → clean PDF for Gradescope */
-  @media print{
-    :root{--bg:#fff;--ink:#000;--muted:#333;--faint:#555;--line:#ccc}
-    body{font-size:11pt;line-height:1.5}
-    .wrap{max-width:none;padding:0}
-    header{padding-top:0}
-    section{padding-top:30px;break-inside:avoid}
-    .split{break-inside:avoid}
-    footer{display:none}
-    a{text-decoration:none;border:0}
-    a[href^="http"]::after{content:" (" attr(href) ")";font-size:8.5pt;color:#555;word-break:break-all}
-    .masthead-meta a[href^="http"]::after{content:""}
-  }
-</style>
+<!-- All styling lives in styles.css. See styleguide.html for a live reference
+     of every reusable class (headings, lists, team rows, split columns,
+     schedule rows, links). Fill the [ … ] placeholders below. -->
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="wrap">
 
+  <!-- MASTHEAD · fill in your project title -->
   <header id="top">
     <p class="kicker">CS184 / 284A · Fall 2026 · Final Project Proposal</p>
-    <h1>Snow Globe of Anything</h1>
-    <p class="standfirst">Drop a photo, a sketch, or a Gaussian-splat capture of your friends inside a glass snow globe — then shake it with your mouse or your phone and watch the snow swirl through refracted water.</p>
+    <h1><span class="ph">[ Project title ]</span></h1>
     <nav class="masthead-meta">
       <span>Proposal</span>
       <a href="#problem">Problem</a>
@@ -152,10 +30,11 @@
     </nav>
   </header>
 
+  <!-- 01 · TITLE, SUMMARY & TEAM -->
   <section id="summary">
-    <p class="sec-label"><b>01</b> Title, Summary &amp; Team</p>
-    <h2>A real-time snow globe you can put anything inside</h2>
-    <p>We will build <strong>Snow Globe of Anything</strong>, an interactive snow globe in the browser that lets you place any subject — a photo, a hand-drawn sketch, or a 3D Gaussian-splat capture — inside a glass dome and shake it to stir up the snow. The project centers on three classic graphics problems working together in real time: <strong>physically-based refraction</strong> through curved glass and water, <strong>particle-based snow dynamics</strong>, and the <strong>swirling fluid motion</strong> of the water. The result is a shareable toy that doubles as a focused study of transmission rendering and coupled particle–fluid simulation.</p>
+    <p class="sec-label"><b>01</b> Title, Summary &amp; Team Members</p>
+    <h2><span class="ph">[ Heading ]</span></h2>
+    <p class="ph">[ A 2–3 sentence summary of the project. ]</p>
 
     <h3>Team Members</h3>
     <div class="team">
@@ -166,99 +45,74 @@
     </div>
   </section>
 
+  <!-- 02 · PROBLEM DESCRIPTION -->
   <section id="problem">
     <p class="sec-label"><b>02</b> Problem Description</p>
-    <h2>Three hard effects, together, in real time</h2>
-    <p>A snow globe is a familiar object, but recreating one convincingly in real time touches several core graphics problems at once. Light bends twice on its way to the eye — through the curved glass dome and again across the water surface — so the subject inside appears shifted, magnified, and tinted. Thousands of snow flakes must float, settle, and then churn back up when the globe is disturbed. And the water itself should swirl with momentum rather than snapping to rest.</p>
-    <p>The problem we are solving is to render and simulate all three effects — refraction, snow, and swirling water — together, interactively, in a browser, while allowing the enclosed subject to be an arbitrary representation. It is <strong>challenging</strong> because refraction through a curved dome and a water interface means tracking multiple index-of-refraction boundaries and Fresnel reflection; snow particles must be driven by a time-varying velocity field so they respond to shaking; and embedding an arbitrary subject inside a refractive medium requires blending different scene representations convincingly.</p>
-    <p>Our general approach is a WebGL2 / Three.js renderer using screen-space and environment-mapped refraction with Fresnel reflections for the glass, a GPU particle system for the snow, and a curl-noise velocity field — a true fluid solver as a stretch goal — for the swirling water. Shaking is driven by mouse drag on desktop and the device-motion API on a phone, injecting angular velocity into the water field.</p>
+    <h2><span class="ph">[ Heading ]</span></h2>
+    <p class="ph">[ Context for the idea. ]</p>
+    <p class="ph">[ The problem you are solving, why it matters, and where it is challenging. ]</p>
+    <p class="ph">[ A general idea of how your team will solve it. ]</p>
   </section>
 
+  <!-- 03 · GOALS & DELIVERABLES -->
   <section id="goals">
     <p class="sec-label"><b>03</b> Goals &amp; Deliverables</p>
-    <h2>What we will measure, and what we will ship</h2>
-    <p class="lead">This is the core of the proposal. We split the work into a baseline we are confident we can deliver and an aspirational plan if things go well.</p>
+    <h2><span class="ph">[ Heading ]</span></h2>
+    <p class="lead ph">[ What you want to accomplish, the results you expect, and how you will measure quality/performance. ]</p>
 
-    <h3>How we measure quality</h3>
+    <h3><span class="ph">[ Sub-heading, e.g. how you measure quality ]</span></h3>
     <ul>
-      <li><strong>Performance</strong> — interactive frame rate (target ≥ 60 fps on a laptop GPU) reported as a particle-count-vs-fps scaling graph.</li>
-      <li><strong>Visual quality</strong> — side-by-side comparison of our real-time refraction against an offline ray-traced reference of the same scene.</li>
-      <li><strong>Interaction</strong> — responsiveness of the shake-to-swirl coupling.</li>
+      <li class="ph">[ Item ]</li>
+      <li class="ph">[ Item ]</li>
     </ul>
 
-    <h3>Questions we plan to answer</h3>
-    <ul>
-      <li>How convincing can screen-space refraction be versus a ray-traced ground truth, inside a real-time budget?</li>
-      <li>How many snow particles can we simulate and draw while staying interactive?</li>
-      <li>Can a Gaussian-splat subject sit inside a refractive medium and still look believable?</li>
-    </ul>
-
+    <!-- Required split: PLAN (baseline) vs. HOPE (aspirational) -->
     <div class="split">
       <div>
         <h3><span class="n">i.</span> What we plan to deliver</h3>
-        <p class="lead">Baseline for a successful project, with room for surprises.</p>
+        <p class="lead ph">[ Baseline for a successful project. ]</p>
         <ul>
-          <li>An interactive glass snow globe with dome refraction and Fresnel reflections.</li>
-          <li>A GPU snow particle system (thousands of flakes) that settles under gravity and is kicked up on shake.</li>
-          <li>Swirling water via a curl-noise velocity field coupled to the snow.</li>
-          <li>Shake interaction by mouse drag and device motion.</li>
-          <li>At least one subject type — a photo or sketch on a plane.</li>
-          <li>A performance study and a refraction quality comparison.</li>
+          <li class="ph">[ Item ]</li>
+          <li class="ph">[ Item ]</li>
+          <li class="ph">[ Item ]</li>
         </ul>
       </div>
       <div>
         <h3><span class="n">ii.</span> What we hope to deliver</h3>
-        <p class="lead">Aspirational, if the baseline lands early.</p>
+        <p class="lead ph">[ Aspirational, if the baseline lands early. ]</p>
         <ul>
-          <li>Gaussian-splat subject import — drop a real 3D capture of your friends inside.</li>
-          <li>Caustics and chromatic dispersion through the glass.</li>
-          <li>A real fluid solver (Stable Fluids or SPH) replacing the procedural field.</li>
-          <li>Snow accumulation on the base and collisions with the subject.</li>
-          <li>Shareable snapshots and permalinks of a configured globe.</li>
+          <li class="ph">[ Item ]</li>
+          <li class="ph">[ Item ]</li>
+          <li class="ph">[ Item ]</li>
         </ul>
       </div>
     </div>
   </section>
 
+  <!-- 04 · SCHEDULE · one row per week -->
   <section id="schedule">
     <p class="sec-label"><b>04</b> Schedule</p>
-    <h2>Four weeks, a set of tasks each week</h2>
-    <p class="lead">Presentations are about four weeks after the proposal deadline, so each week carries concrete tasks split across the four team members.</p>
+    <h2><span class="ph">[ Heading ]</span></h2>
 
     <div class="week">
-      <div class="wk">Week 1<small>Scene &amp; glass</small></div>
-      <ul>
-        <li>Set up the Three.js / WebGL2 project — dome geometry, base, and camera.</li>
-        <li>First-pass glass refraction shader; load and place a subject image.</li>
-        <li>Agree on the data flow between rendering and simulation.</li>
-      </ul>
+      <div class="wk">Week 1<small>[ theme ]</small></div>
+      <ul><li class="ph">[ Task ]</li><li class="ph">[ Task ]</li></ul>
     </div>
     <div class="week">
-      <div class="wk">Week 2<small>Snow &amp; input</small></div>
-      <ul>
-        <li>GPU particle system — spawn, gravity, and settling for the snow.</li>
-        <li>Shake input via mouse drag and the device-motion API.</li>
-        <li>Basic swirling via a curl-noise velocity field driving particles.</li>
-      </ul>
+      <div class="wk">Week 2<small>[ theme ]</small></div>
+      <ul><li class="ph">[ Task ]</li><li class="ph">[ Task ]</li></ul>
     </div>
     <div class="week">
-      <div class="wk">Week 3<small>Coupling &amp; polish</small></div>
-      <ul>
-        <li>Improve glass — Fresnel, environment reflections, water interface.</li>
-        <li>Tune the particle–fluid coupling so shaking convincingly stirs the snow.</li>
-        <li>Instrument performance; produce the scaling graph.</li>
-      </ul>
+      <div class="wk">Week 3<small>[ theme ]</small></div>
+      <ul><li class="ph">[ Task ]</li><li class="ph">[ Task ]</li></ul>
     </div>
     <div class="week">
-      <div class="wk">Week 4<small>Stretch &amp; write-up</small></div>
-      <ul>
-        <li>Pursue stretch goals — splat import and/or caustics — as time allows.</li>
-        <li>Final polish, demo video, and the ray-traced quality comparison.</li>
-        <li>Write the final report and prepare the presentation.</li>
-      </ul>
+      <div class="wk">Week 4<small>[ theme ]</small></div>
+      <ul><li class="ph">[ Task ]</li><li class="ph">[ Task ]</li></ul>
     </div>
   </section>
 
+  <!-- 05 · RESOURCES -->
   <section id="resources">
     <p class="sec-label"><b>05</b> Resources</p>
     <h2>References, platform &amp; starting point</h2>

@@ -1,0 +1,154 @@
+/* ============================================================
+   Snow Globe of Anything — shared styles
+   CS184/284A Fall 2026 proposal + style guide.
+   See styleguide.html for a live reference of every class below.
+   ============================================================ */
+
+:root{
+  --bg:#fcfcfb;
+  --ink:#1a1a18;
+  --muted:#6b6b66;
+  --faint:#9a9a93;
+  --line:#e4e3de;
+  --accent:#1a1a18;
+  --rule:#111;
+  --maxw:640px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121311; --ink:#ececea; --muted:#a3a39c; --faint:#74746d;
+    --line:#2a2b27; --accent:#ececea; --rule:#ececea;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121311; --ink:#ececea; --muted:#a3a39c; --faint:#74746d;
+  --line:#2a2b27; --accent:#ececea; --rule:#ececea;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;
+}
+
+/* Page column ------------------------------------------------ */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+/* Masthead --------------------------------------------------- */
+header{padding:96px 0 0}
+.kicker{
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);
+  font-weight:500;margin:0 0 28px;
+}
+h1{
+  font-family:"Newsreader",Georgia,serif;font-weight:500;
+  font-size:clamp(34px,7vw,52px);line-height:1.08;letter-spacing:-.015em;
+  margin:0 0 20px;
+}
+.standfirst{
+  font-family:"Newsreader",Georgia,serif;font-size:clamp(18px,2.6vw,21px);
+  line-height:1.55;color:var(--muted);font-style:italic;margin:0;max-width:34em;
+}
+.masthead-meta{
+  margin:34px 0 0;padding-top:20px;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:4px 22px;font-size:13.5px;color:var(--muted);
+}
+.masthead-meta a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
+.masthead-meta a:hover{color:var(--ink);border-color:var(--ink)}
+
+/* Sections --------------------------------------------------- */
+section{padding:56px 0 0}
+section:last-of-type{padding-bottom:12px}
+.sec-label{
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);
+  font-weight:600;margin:0 0 10px;
+}
+.sec-label b{color:var(--ink);font-weight:600;margin-right:10px}
+h2{
+  font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:27px;
+  line-height:1.2;letter-spacing:-.01em;margin:0 0 18px;
+}
+h3{
+  font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);
+  font-weight:600;margin:30px 0 10px;
+}
+p{margin:0 0 16px}
+.lead{color:var(--muted)}
+strong{font-weight:600}
+a{color:var(--ink)}
+
+/* Bulleted lists (hairline tick marks) ----------------------- */
+ul{list-style:none;padding:0;margin:14px 0}
+li{position:relative;padding-left:20px;margin:9px 0}
+li::before{content:"";position:absolute;left:0;top:.72em;width:5px;height:1px;background:var(--faint)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;background:var(--line);padding:1px 5px;border-radius:3px}
+
+/* Placeholder text for the blank template -------------------- */
+.ph{color:var(--faint);font-style:italic}
+
+/* Team roster ------------------------------------------------ */
+.team{margin:18px 0 0;border-top:1px solid var(--line)}
+.member{
+  display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  padding:13px 0;border-bottom:1px solid var(--line);
+}
+.member .role{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.member .name{color:var(--muted)}
+
+/* Two-column split (e.g. plan vs. hope) ---------------------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:38px;margin-top:8px}
+.split h3{margin-top:0;display:flex;align-items:baseline;gap:9px}
+.split h3 .n{font-family:"Newsreader",serif;font-style:italic;font-size:20px;text-transform:none;letter-spacing:0;color:var(--faint);font-weight:400}
+
+/* Schedule rows ---------------------------------------------- */
+.week{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:18px 0;border-top:1px solid var(--line)}
+.week:first-of-type{border-top:0;padding-top:4px}
+.week .wk{font-weight:600;font-size:14px}
+.week .wk small{display:block;color:var(--faint);font-weight:400;font-size:12.5px;margin-top:2px}
+.week ul{margin:0}
+.week li{margin:5px 0}
+
+/* Footer ----------------------------------------------------- */
+footer{
+  margin-top:72px;padding:26px 0 72px;border-top:1px solid var(--line);
+  font-size:13px;color:var(--faint);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+footer a{color:var(--faint);text-decoration:none;border-bottom:1px solid var(--line)}
+footer a:hover{color:var(--ink)}
+
+@media (max-width:600px){
+  header{padding-top:64px}
+  .split{grid-template-columns:1fr;gap:28px}
+  .week{grid-template-columns:1fr;gap:6px}
+}
+
+/* Print → clean PDF for Gradescope --------------------------- */
+@media print{
+  :root{--bg:#fff;--ink:#000;--muted:#333;--faint:#555;--line:#ccc}
+  body{font-size:11pt;line-height:1.5}
+  .wrap{max-width:none;padding:0}
+  header{padding-top:0}
+  section{padding-top:30px;break-inside:avoid}
+  .split{break-inside:avoid}
+  footer{display:none}
+  a{text-decoration:none;border:0}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:8.5pt;color:#555;word-break:break-all}
+  .masthead-meta a[href^="http"]::after{content:""}
+}
+
+/* Style-guide page only -------------------------------------- */
+.sg-swatches{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0}
+.sg-swatch{flex:1 1 90px;min-width:90px}
+.sg-swatch i{display:block;height:48px;border:1px solid var(--line);border-radius:6px}
+.sg-swatch span{display:block;font-size:12px;color:var(--muted);margin-top:6px}
+.sg-swatch code{background:none;padding:0}
+.sg-demo{border:1px solid var(--line);border-radius:8px;padding:20px 22px;margin:14px 0}
+.sg-demo + pre{margin-top:-6px}
+pre{
+  background:var(--line);border-radius:8px;padding:14px 16px;overflow:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.5;
+  color:var(--ink);margin:14px 0;
+}
+pre code{background:none;padding:0;font-size:inherit}
