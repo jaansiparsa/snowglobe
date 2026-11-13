@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CS184 Project Proposal</title>
-<meta name="description" content="CS184/284A Fall 2026 final project proposal.">
+<title>Snow Globe of Anything: CS184 Project Proposal</title>
+<meta name="description" content="CS184/284A Fall 2026 final project proposal: a real-time snow globe of anything. Glass refraction, snow particle physics, and swirling water.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -19,7 +19,8 @@
   <!-- MASTHEAD · fill in your project title -->
   <header id="top">
     <p class="kicker">CS184 / 284A · Fall 2026 · Final Project Proposal</p>
-    <h1><span class="ph">[ Project title ]</span></h1>
+    <h1>Snow Globe of Anything</h1>
+    <p class="standfirst">Put any subject inside a glass snow globe, then shake it with your mouse or phone to make the snow swirl. The technical work is glass refraction, snow particle physics, and swirling water.</p>
     <nav class="masthead-meta">
       <span>Proposal</span>
       <a href="#problem">Problem</a>
@@ -119,22 +120,22 @@
 
     <h3>References</h3>
     <ul>
-      <li>Pharr, Jakob &amp; Humphreys, <em>Physically Based Rendering</em> — refraction, Fresnel, transmission. <a href="https://pbr-book.org/">pbr-book.org</a></li>
-      <li>Bridson et al., “Curl-Noise for Procedural Fluid Flow,” SIGGRAPH 2007 — divergence-free swirling fields.</li>
-      <li>Stam, “Stable Fluids,” SIGGRAPH 1999 — real-time fluid solver for the stretch goal.</li>
+      <li>Pharr, Jakob &amp; Humphreys, <em>Physically Based Rendering</em>. Refraction, Fresnel, transmission. <a href="https://pbr-book.org/">pbr-book.org</a></li>
+      <li>Bridson et al., “Curl-Noise for Procedural Fluid Flow,” SIGGRAPH 2007. Divergence-free swirling fields.</li>
+      <li>Stam, “Stable Fluids,” SIGGRAPH 1999. Real-time fluid solver for the stretch goal.</li>
       <li>Kerbl et al., “3D Gaussian Splatting for Real-Time Radiance Field Rendering,” SIGGRAPH 2023. <a href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/">project page</a></li>
-      <li>Three.js documentation — transmission material, GPU particles, environment maps. <a href="https://threejs.org/docs/">threejs.org/docs</a></li>
+      <li>Three.js documentation. Transmission material, GPU particles, environment maps. <a href="https://threejs.org/docs/">threejs.org/docs</a></li>
     </ul>
 
     <h3>Platform, hardware &amp; software</h3>
     <ul>
-      <li><strong>Platform</strong> — the web: WebGL2 via Three.js with GLSL shaders; runs in desktop and mobile browsers.</li>
-      <li><strong>Hardware</strong> — personal laptops (macOS) for development and a phone for the device-motion shake.</li>
-      <li><strong>Software</strong> — JavaScript / TypeScript, Three.js, Vite, and Git / GitHub.</li>
+      <li><strong>Platform:</strong> the web. WebGL2 via Three.js with GLSL shaders. Runs in desktop and mobile browsers.</li>
+      <li><strong>Hardware:</strong> personal laptops (macOS) for development, a phone for the device-motion shake.</li>
+      <li><strong>Software:</strong> JavaScript / TypeScript, Three.js, Vite, Git / GitHub.</li>
     </ul>
 
     <h3>Starting point</h3>
-    <p>We start from the open-source <a href="https://threejs.org/">Three.js</a> library and its transmission-material and GPU-particle examples, adapting rather than using them as-is. Our own work lives in the project repository: <a href="https://github.com/jaansiparsa/snowglobe">github.com/jaansiparsa/snowglobe</a>.</p>
+    <p>We start from the open-source <a href="https://threejs.org/">Three.js</a> library and its transmission-material and GPU-particle examples, adapting them rather than using them as-is. Our work lives in the project repository: <a href="https://github.com/jaansiparsa/snowglobe">github.com/jaansiparsa/snowglobe</a>.</p>
   </section>
 
   <footer>
