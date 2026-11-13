@@ -48,8 +48,8 @@ h1{
   margin:0 0 20px;
 }
 .standfirst{
-  font-family:"Newsreader",Georgia,serif;font-size:clamp(18px,2.6vw,21px);
-  line-height:1.55;color:var(--muted);font-style:italic;margin:0;max-width:34em;
+  font-size:16px;line-height:1.65;color:var(--muted);font-weight:400;
+  margin:0;max-width:40em;
 }
 .masthead-meta{
   margin:34px 0 0;padding-top:20px;border-top:1px solid var(--line);
