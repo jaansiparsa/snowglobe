@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Style Guide — CS184 Proposal</title>
+<meta name="description" content="Reusable styles for the CS184 proposal template. Copy the markup for each component.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header id="top">
+    <p class="kicker">Reference</p>
+    <h1>Style Guide</h1>
+    <p class="standfirst">Every reusable style in <code>styles.css</code>. Copy the markup under each example into <code>index.html</code> — all styling is automatic, so you never need to touch CSS or add inline styles.</p>
+    <nav class="masthead-meta">
+      <span>Contents</span>
+      <a href="#color">Color</a>
+      <a href="#type">Type</a>
+      <a href="#text">Text</a>
+      <a href="#lists">Lists</a>
+      <a href="#team">Team</a>
+      <a href="#split">Split</a>
+      <a href="#schedule">Schedule</a>
+      <a href="index.html">← Proposal</a>
+    </nav>
+  </header>
+
+  <!-- COLOR -->
+  <section id="color">
+    <p class="sec-label"><b>A</b> Color tokens</p>
+    <h2>Palette</h2>
+    <p class="lead">Defined as CSS variables on <code>:root</code> and auto-inverted in dark mode. Reference them as <code>var(--ink)</code> etc. — don't hard-code hex values.</p>
+    <div class="sg-swatches">
+      <div class="sg-swatch"><i style="background:var(--bg)"></i><span><code>--bg</code></span></div>
+      <div class="sg-swatch"><i style="background:var(--ink)"></i><span><code>--ink</code></span></div>
+      <div class="sg-swatch"><i style="background:var(--muted)"></i><span><code>--muted</code></span></div>
+      <div class="sg-swatch"><i style="background:var(--faint)"></i><span><code>--faint</code></span></div>
+      <div class="sg-swatch"><i style="background:var(--line)"></i><span><code>--line</code></span></div>
+    </div>
+  </section>
+
+  <!-- TYPE -->
+  <section id="type">
+    <p class="sec-label"><b>B</b> Headings</p>
+    <h2>Type scale</h2>
+    <p class="lead">Section number + name uses <code>.sec-label</code>; the big serif heading is <code>&lt;h2&gt;</code>; sub-headings are <code>&lt;h3&gt;</code>.</p>
+    <div class="sg-demo">
+      <p class="sec-label"><b>01</b> Section name</p>
+      <h2>Serif section heading</h2>
+      <h3>Uppercase sub-heading</h3>
+    </div>
+<pre><code>&lt;p class="sec-label"&gt;&lt;b&gt;01&lt;/b&gt; Section name&lt;/p&gt;
+&lt;h2&gt;Serif section heading&lt;/h2&gt;
+&lt;h3&gt;Uppercase sub-heading&lt;/h3&gt;</code></pre>
+  </section>
+
+  <!-- TEXT -->
+  <section id="text">
+    <p class="sec-label"><b>C</b> Body text</p>
+    <h2>Paragraphs &amp; emphasis</h2>
+    <div class="sg-demo">
+      <p>A normal paragraph. Use <strong>&lt;strong&gt;</strong> for emphasis and <a href="https://threejs.org/">a link</a> inline.</p>
+      <p class="lead">A quieter <code>.lead</code> paragraph for intros and captions.</p>
+      <p class="ph">[ A placeholder prompt — class <code>.ph</code> — for blanks to fill in. ]</p>
+    </div>
+<pre><code>&lt;p&gt;A normal paragraph with &lt;strong&gt;emphasis&lt;/strong&gt; and &lt;a href="…"&gt;a link&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="lead"&gt;A quieter intro/caption paragraph.&lt;/p&gt;
+&lt;p class="ph"&gt;[ A placeholder prompt to fill in. ]&lt;/p&gt;</code></pre>
+  </section>
+
+  <!-- LISTS -->
+  <section id="lists">
+    <p class="sec-label"><b>D</b> Lists</p>
+    <h2>Bulleted list</h2>
+    <p class="lead">Plain <code>&lt;ul&gt;</code> / <code>&lt;li&gt;</code> — the hairline tick mark is added automatically.</p>
+    <div class="sg-demo">
+      <ul>
+        <li>First item.</li>
+        <li>Second item, a little longer so you can see how it wraps onto a second line.</li>
+      </ul>
+    </div>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;First item.&lt;/li&gt;
+  &lt;li&gt;Second item.&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team">
+    <p class="sec-label"><b>E</b> Team roster</p>
+    <h2>Member rows</h2>
+    <div class="sg-demo">
+      <div class="team">
+        <div class="member"><span class="role">Member 01</span><span class="name">Ada Lovelace · ada@berkeley.edu</span></div>
+        <div class="member"><span class="role">Member 02</span><span class="name">[Name &amp; email]</span></div>
+      </div>
+    </div>
+<pre><code>&lt;div class="team"&gt;
+  &lt;div class="member"&gt;
+    &lt;span class="role"&gt;Member 01&lt;/span&gt;
+    &lt;span class="name"&gt;Ada Lovelace · ada@berkeley.edu&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- SPLIT -->
+  <section id="split">
+    <p class="sec-label"><b>F</b> Two-column split</p>
+    <h2>Side-by-side columns</h2>
+    <p class="lead">Used for the required plan-vs-hope deliverables. Collapses to one column on phones. The italic <code>.n</code> span is an optional numeral.</p>
+    <div class="sg-demo">
+      <div class="split">
+        <div>
+          <h3><span class="n">i.</span> Left column</h3>
+          <ul><li>Point one.</li><li>Point two.</li></ul>
+        </div>
+        <div>
+          <h3><span class="n">ii.</span> Right column</h3>
+          <ul><li>Point one.</li><li>Point two.</li></ul>
+        </div>
+      </div>
+    </div>
+<pre><code>&lt;div class="split"&gt;
+  &lt;div&gt;
+    &lt;h3&gt;&lt;span class="n"&gt;i.&lt;/span&gt; Left column&lt;/h3&gt;
+    &lt;ul&gt;&lt;li&gt;Point one.&lt;/li&gt;&lt;/ul&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;h3&gt;&lt;span class="n"&gt;ii.&lt;/span&gt; Right column&lt;/h3&gt;
+    &lt;ul&gt;&lt;li&gt;Point one.&lt;/li&gt;&lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section id="schedule">
+    <p class="sec-label"><b>G</b> Schedule rows</p>
+    <h2>Week row</h2>
+    <p class="lead">A label column (week + theme) beside its task list. Stacks on phones.</p>
+    <div class="sg-demo">
+      <div class="week">
+        <div class="wk">Week 1<small>theme</small></div>
+        <ul><li>A task for the week.</li><li>Another task.</li></ul>
+      </div>
+    </div>
+<pre><code>&lt;div class="week"&gt;
+  &lt;div class="wk"&gt;Week 1&lt;small&gt;theme&lt;/small&gt;&lt;/div&gt;
+  &lt;ul&gt;&lt;li&gt;A task.&lt;/li&gt;&lt;li&gt;Another task.&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+  </section>
+
+  <footer>
+    <span>Style guide · built on styles.css</span>
+    <a href="index.html">← Back to proposal</a>
+  </footer>
+
+</div>
+</body>
+</html>
