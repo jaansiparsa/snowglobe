@@ -50,6 +50,14 @@
     <p>A snow globe is a simple object we all know and love (especially during the holiday season), but building one visually is really interesting and kind of challenging. To make one you can actually play with, we have to get the glass, the snow, and the water all working together.</p>
     <p>We want to make a snow globe that runs in the browser, holds whatever you put inside, and reacts when you shake it. We think the main challenges are the glass and the snow. The glass refracts light twice, at the dome and at the water, which warps and tints the subject, and that is honestly pretty hard to reproduce in real time. The snow has to kick up when you shake the globe and then settle afterward, which means simulating a lot of particles at once. On top of that it all needs to run fast enough to still feel interactive.</p>
     <p>We are planning to build it with Three.js and WebGL2. For the glass we will probably use screen-space and environment-mapped refraction, with a bit of Fresnel for the reflections. The snow runs as a GPU particle system, and the water is kind of a curl-noise field that the particles ride along with. Dragging with your mouse feeds motion into that field so the globe shakes.</p>
+
+    <p><strong>Our technical contributions:</strong></p>
+    <ul>
+      <li>A refraction shader we write ourselves. Each ray hits the sphere and bends twice, once going from air into glass (IOR around 1.5) and again from glass into water (around 1.33). We do the Snell's law and Schlick's Fresnel math in the shader instead of using Three.js's transmission material.</li>
+      <li>Our own particle simulation on the GPU. We store the snow's positions and velocities in float textures and swap between two of them every frame. The forces, and the collisions with the glass and the base, are things we write.</li>
+      <li>Our own curl-noise water, which pushes the snow around.</li>
+    </ul>
+    <p>We use Three.js for the scene graph, the camera, and render targets. Everything else is our code.</p>
   </section>
 
   <!-- 03 · GOALS & DELIVERABLES -->
@@ -136,7 +144,7 @@
     </ul>
 
     <h3>Starting point</h3>
-    <p>We start from the open-source <a href="https://threejs.org/">Three.js</a> library and its transmission-material and GPU-particle examples, adapting them rather than using them as-is. Our work lives in the project repository: <a href="https://github.com/jaansiparsa/snowglobe">github.com/jaansiparsa/snowglobe</a>.</p>
+    <p>We start from the open-source <a href="https://threejs.org/">Three.js</a> library for the basic scene setup. The glass, snow, and water are all written by us. Our work lives in the project repository: <a href="https://github.com/jaansiparsa/snowglobe">github.com/jaansiparsa/snowglobe</a>.</p>
   </section>
 
   <footer>
