@@ -20,7 +20,6 @@
   <header id="top">
     <p class="kicker">CS184 / 284A · Fall 2026 · Final Project Proposal</p>
     <h1>Snowcase</h1>
-    <p class="standfirst">Turn any photo, sketch, or Gaussian-splat capture into a glass snow globe you can shake. Snowcase renders it in the browser in real time. The technical work is glass refraction, snow particle physics, and swirling water.</p>
     <nav class="masthead-meta">
       <span>Proposal</span>
       <a href="#problem">Problem</a>
@@ -33,90 +32,92 @@
 
   <!-- 01 · TITLE, SUMMARY & TEAM -->
   <section id="summary">
-    <p class="sec-label"><b>01</b> Title, Summary &amp; Team Members</p>
-    <h2><span class="ph">[ Heading ]</span></h2>
-    <p class="ph">[ A 2–3 sentence summary of the project. ]</p>
+    <h2>Title, Summary and Team Members</h2>
+    <p>We want to make Snowcase, a web app that puts any image inside a glass snow globe. You drop in a photo, a sketch, or a Gaussian-splat capture, then shake the globe with your mouse or phone to stir up the snow. It all runs live in the browser. The core of the project is really three things: glass refraction, snow particle physics, and swirling water.</p>
 
     <h3>Team Members</h3>
-    <div class="team">
-      <div class="member"><span class="role">Member 01</span><span class="name">[Name &amp; email]</span></div>
-      <div class="member"><span class="role">Member 02</span><span class="name">[Name &amp; email]</span></div>
-      <div class="member"><span class="role">Member 03</span><span class="name">[Name &amp; email]</span></div>
-      <div class="member"><span class="role">Member 04</span><span class="name">[Name &amp; email]</span></div>
-    </div>
+    <ul>
+      <li>Jaansi Parsa</li>
+      <li>Pranav Kannepalli</li>
+      <li>Adam Hacker</li>
+      <li>Katia Jacoby</li>
+    </ul>
   </section>
 
   <!-- 02 · PROBLEM DESCRIPTION -->
   <section id="problem">
-    <p class="sec-label"><b>02</b> Problem Description</p>
-    <h2><span class="ph">[ Heading ]</span></h2>
-    <p class="ph">[ Context for the idea. ]</p>
-    <p class="ph">[ The problem you are solving, why it matters, and where it is challenging. ]</p>
-    <p class="ph">[ A general idea of how your team will solve it. ]</p>
+    <h2>Problem Description</h2>
+    <p>A snow globe is a simple object we all know and love (especially during the holiday season), but building one visually is really interesting and kind of challenging. To make one you can actually play with, we have to get the glass, the snow, and the water all working together.</p>
+    <p>We want to make a snow globe that runs in the browser, holds whatever you put inside, and reacts when you shake it. We think the main challenges are the glass and the snow. The glass refracts light twice, at the dome and at the water, which warps and tints the subject, and that is honestly pretty hard to reproduce in real time. The snow has to kick up when you shake the globe and then settle afterward, which means simulating a lot of particles at once. On top of that it all needs to run fast enough to still feel interactive.</p>
+    <p>We are planning to build it with Three.js and WebGL2. For the glass we will probably use screen-space and environment-mapped refraction, with a bit of Fresnel for the reflections. The snow runs as a GPU particle system, and the water is kind of a curl-noise field that the particles ride along with. Dragging with your mouse feeds motion into that field so the globe shakes.</p>
   </section>
 
   <!-- 03 · GOALS & DELIVERABLES -->
   <section id="goals">
-    <p class="sec-label"><b>03</b> Goals &amp; Deliverables</p>
-    <h2><span class="ph">[ Heading ]</span></h2>
-    <p class="lead ph">[ What you want to accomplish, the results you expect, and how you will measure quality/performance. ]</p>
-
-    <h3><span class="ph">[ Sub-heading, e.g. how you measure quality ]</span></h3>
+    <h2>Goals and Deliverables</h2>
+    <p><strong>What we plan on delivering:</strong></p>
     <ul>
-      <li class="ph">[ Item ]</li>
-      <li class="ph">[ Item ]</li>
+      <li>A working snow globe in the browser that you load a photo or sketch into as the subject.</li>
+      <li>Glass that refracts the subject, with Fresnel reflections.</li>
+      <li>Drag with your mouse to send a few thousand snow particles swirling and then settling in the water.</li>
+    </ul>
+    <p><strong>What we hope to deliver (if the baseline comes together early):</strong></p>
+    <ul>
+      <li>Shake the globe by moving your phone.</li>
+      <li>Add a 3D reconstruction inside, built from lots of 2D angled pictures (Gaussian splatting).</li>
+      <li>Caustics and a bit of color dispersion through the glass.</li>
+      <li>Snow piling up on the base.</li>
+      <li>A button to save and share a snapshot of your globe.</li>
     </ul>
 
-    <!-- Required split: PLAN (baseline) vs. HOPE (aspirational) -->
-    <div class="split">
-      <div>
-        <h3><span class="n">i.</span> What we plan to deliver</h3>
-        <p class="lead ph">[ Baseline for a successful project. ]</p>
-        <ul>
-          <li class="ph">[ Item ]</li>
-          <li class="ph">[ Item ]</li>
-          <li class="ph">[ Item ]</li>
-        </ul>
-      </div>
-      <div>
-        <h3><span class="n">ii.</span> What we hope to deliver</h3>
-        <p class="lead ph">[ Aspirational, if the baseline lands early. ]</p>
-        <ul>
-          <li class="ph">[ Item ]</li>
-          <li class="ph">[ Item ]</li>
-          <li class="ph">[ Item ]</li>
-        </ul>
-      </div>
-    </div>
+    <p><strong>How we will measure quality and performance:</strong></p>
+    <ul>
+      <li>Plot frame rate as we push the snow-particle count up, so we can see where it stops feeling smooth. Rough target: hopefully stay interactive (around 60 fps) with a few thousand particles on a laptop.</li>
+      <li>Put our real-time glass next to an offline ray-traced render of the same scene and measure how far off the refraction looks.</li>
+      <li>Time each part of a frame (snow, water, glass) so we know what is actually costing us.</li>
+    </ul>
+
+    <p><strong>Questions we plan to answer:</strong></p>
+    <ul>
+      <li>How close can our real-time glass get to the ray-traced version?</li>
+      <li>How many snow particles can we push before it stops feeling smooth?</li>
+      <li>Does the cheap curl-noise water read as well as a real fluid simulation would?</li>
+    </ul>
   </section>
 
   <!-- 04 · SCHEDULE · one row per week -->
   <section id="schedule">
-    <p class="sec-label"><b>04</b> Schedule</p>
-    <h2><span class="ph">[ Heading ]</span></h2>
+    <h2>Schedule</h2>
 
-    <div class="week">
-      <div class="wk">Week 1<small>[ theme ]</small></div>
-      <ul><li class="ph">[ Task ]</li><li class="ph">[ Task ]</li></ul>
-    </div>
-    <div class="week">
-      <div class="wk">Week 2<small>[ theme ]</small></div>
-      <ul><li class="ph">[ Task ]</li><li class="ph">[ Task ]</li></ul>
-    </div>
-    <div class="week">
-      <div class="wk">Week 3<small>[ theme ]</small></div>
-      <ul><li class="ph">[ Task ]</li><li class="ph">[ Task ]</li></ul>
-    </div>
-    <div class="week">
-      <div class="wk">Week 4<small>[ theme ]</small></div>
-      <ul><li class="ph">[ Task ]</li><li class="ph">[ Task ]</li></ul>
-    </div>
+    <p><strong>Week 1:</strong></p>
+    <ul>
+      <li>Get the basic scene running in Three.js with the glass dome, the base, and a camera.</li>
+      <li>Get a first version of the glass bending whatever is behind it.</li>
+      <li>Drop an image inside to act as the subject.</li>
+    </ul>
+    <p><strong>Week 2:</strong></p>
+    <ul>
+      <li>Add the snow as a GPU particle system so it falls and piles up.</li>
+      <li>Wire mouse dragging to shake the globe.</li>
+      <li>Use a curl-noise flow to get the snow swirling.</li>
+    </ul>
+    <p><strong>Week 3:</strong></p>
+    <ul>
+      <li>Make the glass look right with reflections, the water surface, and Schlick's Fresnel.</li>
+      <li>Tune things so a shake actually stirs the snow.</li>
+      <li>Start measuring frame rate as we push the particle count up.</li>
+    </ul>
+    <p><strong>Week 4:</strong></p>
+    <ul>
+      <li>Spend time on whatever stretch goals we can reach, like phone shake, splat import, or caustics.</li>
+      <li>Polish everything and record the demo video.</li>
+      <li>Write the report and slides.</li>
+    </ul>
   </section>
 
   <!-- 05 · RESOURCES -->
   <section id="resources">
-    <p class="sec-label"><b>05</b> Resources</p>
-    <h2>References, platform &amp; starting point</h2>
+    <h2>Resources</h2>
 
     <h3>References</h3>
     <ul>
