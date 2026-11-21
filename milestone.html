@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snowcase: CS184 Milestone</title>
+<meta name="description" content="CS184/284A Fall 2026 final project milestone. Snowcase: a real-time snow globe in the browser with custom glass refraction, GPU snow, and curl-noise water.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="report">
+<div class="wrap">
+
+  <header id="top">
+    <p class="kicker">CS184 / 284A · Fall 2026 · Milestone Report</p>
+    <h1>Snowcase</h1>
+    <p class="standfirst">Jaansi Parsa, Pranav Kannepalli, Adam Hacker, Katia Jacoby</p>
+    <nav class="masthead-meta">
+      <span>Milestone</span>
+      <a href="app/">Live demo</a>
+      <a href="#done">Progress</a>
+      <a href="#results">Results</a>
+      <a href="#plan">Updated plan</a>
+      <a href="index.html">Proposal</a>
+      <a href="https://github.com/jaansiparsa/snowglobe">Repository ↗</a>
+    </nav>
+  </header>
+
+  <section id="done">
+    <h2>What we have accomplished</h2>
+    <p>The full baseline from our proposal runs in the browser, plus our first stretch goal. <a href="app/">Try it</a>: pick a sketch or drop in your own image, then drag the globe to shake it.</p>
+    <ul>
+      <li><strong>Our own glass shader.</strong> The shader intersects the exact sphere, applies Schlick's Fresnel for reflections, and refracts twice with Snell's law (air to glass at 1.5, glass to water at 1.33). It then ray-marches the bent ray against the depth buffer of a separate interior pass. Rays that hit nothing leave through the back, refracting twice more. Water and glass add Beer–Lambert absorption.</li>
+      <li><strong>GPU snow.</strong> Flake positions and velocities live in float textures that we ping-pong each frame. Flakes feel gravity minus buoyancy, drag toward the water's velocity (integrated exactly, so it is stable at any frame rate), and an inertial force when the globe accelerates. They bounce off the glass and stick to the floor.</li>
+      <li><strong>Curl-noise water.</strong> The flow is the curl of a simplex-noise potential, so it is divergence-free. Bridson's boundary ramp keeps it running along the glass, not through it. Shaking adds a lagging slosh and turbulence that decays over a few seconds.</li>
+      <li><strong>Shaking.</strong> The globe follows the mouse on a spring and wobbles on release. <strong>Stretch goal done:</strong> on phones, the accelerometer (DeviceMotion, with the iOS permission prompt) shakes it.</li>
+    </ul>
+  </section>
+
+  <section id="results">
+    <h2>Preliminary results</h2>
+    <div class="figs">
+      <figure><img src="assets/milestone/norefract.jpg" alt="Globe rendered with refraction turned off"><figcaption>Refraction off</figcaption></figure>
+      <figure><img src="assets/milestone/full.jpg" alt="Same globe with full glass and water optics"><figcaption>Full optics</figcaption></figure>
+      <figure><img src="assets/milestone/shake.jpg" alt="Globe mid-shake with snow swirling"><figcaption>Mid-shake</figcaption></figure>
+      <figure><img src="assets/milestone/cottage.jpg" alt="Globe with a cottage sketch inside"><figcaption>Another subject</figcaption></figure>
+    </div>
+    <p class="caption">The water-filled sphere acts as a ball lens. It magnifies the subject about 1.4×, squeezes the floor into a thin band, and adds a Fresnel rim.</p>
+    <p>How many flakes can we push? Our benchmark times each pass without vsync. It runs 20 iterations, syncs with a one-pixel readback, and keeps the best of 3. Test setup: Apple M1 Pro, Chrome, a 2400×1600 buffer, and the snow at full turbulence.</p>
+    <table class="results">
+      <tr><th>Flakes</th><th>Snow sim</th><th>Interior</th><th>Glass</th><th>Frame</th><th>FPS</th></tr>
+      <tr><td>4,096</td><td>0.26 ms</td><td>0.31 ms</td><td>3.9 ms</td><td>4.1 ms</td><td>246</td></tr>
+      <tr><td>16,384</td><td>0.26 ms</td><td>0.36 ms</td><td>3.9 ms</td><td>3.8 ms</td><td>264</td></tr>
+      <tr><td>65,536</td><td>0.56 ms</td><td>0.50 ms</td><td>4.2 ms</td><td>4.5 ms</td><td>221</td></tr>
+      <tr><td>262,144</td><td>1.1 ms</td><td>1.4 ms</td><td>3.5 ms</td><td>5.6 ms</td><td>180</td></tr>
+    </table>
+    <p>Even 262K flakes, 60× our target, run at 180 fps. The snow is cheap. The 64-step glass ray march takes most of the frame at every flake count, so that is the pass to optimize.</p>
+  </section>
+
+  <section id="reflection">
+    <h2>Progress relative to our plan</h2>
+    <p>We are ahead of schedule. Weeks 1–2, most of week 3, and the first week-4 stretch goal are done. We dropped Vite for plain ES modules with an import map, so the same files run on GitHub Pages without a build step. Still open:</p>
+    <ul>
+      <li>The comparison against a ray-traced render is not done yet.</li>
+      <li>We have only tested phone shake with emulated motion events, not on a real phone.</li>
+      <li>Flakes streak at the very rim, where the screen-space march breaks down. Snow passes through the subject card, and reflections inside the glass are ignored.</li>
+    </ul>
+  </section>
+
+  <section id="plan">
+    <h2>Updated work plan</h2>
+    <ul>
+      <li><strong>Week 3:</strong> compare a path-traced render to ours. Test phone shake on iOS and Android. Fix the rim streaks and add flake collisions with the subject. Pile snow up on the floor with a height field.</li>
+      <li><strong>Week 4:</strong> Gaussian-splat subjects, then caustics and dispersion, as time allows. Add a snapshot button. Make the final video, slides, and report.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>CS184 / 284A · Fall 2026 · Milestone</span>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+</div>
+</body>
+</html>
