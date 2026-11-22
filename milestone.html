@@ -47,8 +47,8 @@
       <figure><img src="assets/milestone/shake.jpg" alt="Globe mid-shake with snow swirling"><figcaption>Mid-shake</figcaption></figure>
       <figure><img src="assets/milestone/cottage.jpg" alt="Globe with a cottage sketch inside"><figcaption>Another subject</figcaption></figure>
     </div>
-    <p class="caption">The water-filled sphere acts as a ball lens. It magnifies the subject about 1.4×, squeezes the floor into a thin band, and adds a Fresnel rim.</p>
-    <p>How many flakes can we push? Our benchmark times each pass without vsync. It runs 20 iterations, syncs with a one-pixel readback, and keeps the best of 3. Test setup: Apple M1 Pro, Chrome, a 2400×1600 buffer, and the snow at full turbulence.</p>
+    <p class="caption">The water-filled sphere acts as a ball lens. It magnifies the subject about 1.4x, squeezes the floor into a thin band, and adds a Fresnel rim.</p>
+    <p>How many flakes can we push? Our benchmark times each pass without vsync. It runs 20 iterations, syncs with a one-pixel readback, and keeps the best of 3. Test setup: Apple M1 Pro, Chrome, a 2400x1600 buffer, and the snow at full turbulence.</p>
     <table class="results">
       <tr><th>Flakes</th><th>Snow sim</th><th>Interior</th><th>Glass</th><th>Frame</th><th>FPS</th></tr>
       <tr><td>4,096</td><td>0.26 ms</td><td>0.31 ms</td><td>3.9 ms</td><td>4.1 ms</td><td>246</td></tr>
@@ -56,7 +56,7 @@
       <tr><td>65,536</td><td>0.56 ms</td><td>0.50 ms</td><td>4.2 ms</td><td>4.5 ms</td><td>221</td></tr>
       <tr><td>262,144</td><td>1.1 ms</td><td>1.4 ms</td><td>3.5 ms</td><td>5.6 ms</td><td>180</td></tr>
     </table>
-    <p>Even 262K flakes, 60× our target, run at 180 fps. The snow is cheap. The 64-step glass ray march takes most of the frame at every flake count, so that is the pass to optimize.</p>
+    <p>Even 262K flakes, 60x our target, run at 180 fps. The snow is cheap. The 64-step glass ray march takes most of the frame at every flake count, so that is the pass to optimize.</p>
   </section>
 
   <section id="reflection">
