@@ -51,6 +51,27 @@ h1{
   font-size:16px;line-height:1.65;color:var(--muted);font-weight:400;
   margin:0;max-width:40em;
 }
+/* Deliverable links (milestone/final): video, slides, demo */
+.deliverables{
+  margin:30px 0 0;display:grid;grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--line);border-radius:8px;overflow:hidden;
+}
+.deliverables a{
+  display:block;padding:14px 16px;text-decoration:none;color:var(--ink);
+  border-left:1px solid var(--line);transition:background .15s;
+}
+.deliverables a:first-child{border-left:0}
+.deliverables a:hover{background:var(--line)}
+.dl-label{
+  display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--faint);font-weight:600;margin-bottom:2px;
+}
+.dl-title{display:block;font-size:15px;font-weight:500;line-height:1.35}
+@media (max-width:600px){
+  .deliverables{grid-template-columns:1fr}
+  .deliverables a{border-left:0;border-top:1px solid var(--line)}
+  .deliverables a:first-child{border-top:0}
+}
 .masthead-meta{
   margin:34px 0 0;padding-top:20px;border-top:1px solid var(--line);
   display:flex;flex-wrap:wrap;gap:4px 22px;font-size:13.5px;color:var(--muted);
@@ -181,4 +202,10 @@ pre code{background:none;padding:0;font-size:inherit}
   .report .results{margin:4px 0;font-size:8.5pt}
   .report .results th,.report .results td{padding:2px 8px}
   .report a[href^="http"]::after{content:""}
+  .report .deliverables{margin-top:12px;break-inside:avoid}
+  .report .deliverables a{padding:6px 10px}
+  .report .dl-title{font-size:10pt}
+  .report .deliverables a::after{
+    content:attr(data-url);display:block;font-size:7.5pt;color:#555;word-break:break-all;
+  }
 }
